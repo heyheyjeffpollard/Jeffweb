@@ -159,17 +159,27 @@
             // --- 1. Dynamic Logo Gallery ---
             // Rebuilt with the "two-track" method for a seamless loop
 
+            // --- THIS IS THE UPDATED LIST ---
+            // It follows your desired order and uses your exact file names.
+            // I've added placeholders for items you mentioned but didn't have files for.
             const logoFiles = [
-                'https://placehold.co/150x80/EBF4FF/333?text=Logo+One',
-                'https://placehold.co/150x80/FFFBEB/333?text=Logo+Two',
-                'https://placehold.co/150x80/F0FDF4/333?text=Logo+Three',
-                'https://placehold.co/150x80/FEF2F2/333?text=Logo+Four',
-                'https://placehold.co/150x80/F5F3FF/333?text=Logo+Five',
-                'https://placehold.co/150x80/FAF5FF/333?text=Logo+Six',
-                'https://placehold.co/150x80/FFF7ED/333?text=Logo+Seven',
-                'https://placehold.co/150x80/FDF2F8/333?text=Logo+Eight',
-                'https://placehold.co/150x80/ECFEFF/333?text=Logo+Nine',
-                'https://placehold.co/150x80/F3F4F6/333?text=Logo+Ten'
+                'media/logos/nickelodeon.png',
+                'media/logos/BLUEVIEW.png',
+                'media/logos/Torrance_Art_Museum.png',
+                'https://placehold.co/150x80/FEF2F2/333?text=Ragin+Cajun+Cafe', // Placeholder
+                'media/logos/eatsmallsouthbay.png',
+                'media/logos/dollar_hits.png',
+                'media/logos/Project_Barley.png',
+                'media/logos/Black_Raven_Tattoo.png',
+                'media/logos/cropswapla.png',
+                'media/logos/Manhattan Beach Studios.png',
+                'https://placehold.co/150x80/F0FDF4/333?text=dine+eat+repeat', // Placeholder
+                'https://placehold.co/150x80/FAF5FF/333?text=Soraya+Zain', // Placeholder
+                'https://placehold.co/150x80/FFFBEB/333?text=Ruby+Croak', // Placeholder
+                'media/logos/nik_kacy_footwear.png',
+                // --- Other files you provided ---
+                'media/logos/Kappo_Irifune.png',
+                'media/logos/Picnic_with_Me.png'
             ];
 
             const logoContainer = document.getElementById('logo-gallery-container');
@@ -187,13 +197,31 @@
 
                 // 1. Create a function to create a single logo element
                 const createLogoItem = (filePath) => {
-                    const altText = filePath.split('=').pop() || 'Partner Logo';
+                    // Check if it's a placeholder or a real file path to create alt text
+                    let altText = 'Partner Logo';
+                    if (filePath.includes('placehold.co')) {
+                        try {
+                            // Try to get text from placeholder URL
+                            altText = decodeURIComponent(filePath.split('=').pop());
+                        } catch (e) { /* use default */ }
+                    } else {
+                        // Get filename from path, remove extension
+                        try {
+                            altText = filePath.split('/').pop().split('.')[0].replace(/_/g, ' ');
+                        } catch (e) { /* use default */ }
+                    }
+
                     const logoWrapper = document.createElement('div');
                     logoWrapper.className = 'flex-shrink-0 w-40 flex items-center justify-center h-32 md:h-40 p-4';
                     const img = document.createElement('img');
                     img.src = filePath;
                     img.alt = altText;
                     img.className = 'max-h-16 md:max-h-20 w-auto object-contain';
+                    // Add error handler for broken image links
+                    img.onerror = () => { 
+                        img.src = `https://placehold.co/150x80/FEF2F2/333?text=Image+Error`;
+                        img.alt = `Error loading ${altText}`;
+                    };
                     logoWrapper.appendChild(img);
                     return logoWrapper;
                 };
@@ -214,6 +242,7 @@
                 const track2 = createTrack();
 
                 // 4. Apply the animation to both tracks
+                // Calculate duration based on the number of items
                 const animationDuration = logoFiles.length * scrollSpeed;
                 const animationStyle = `scroll-horizontal ${animationDuration}s linear infinite`;
                 
@@ -234,7 +263,17 @@
                 staticGrid.innerHTML = '';
 
                 logoFiles.forEach(filePath => {
-                    const altText = filePath.split('=').pop() || 'Partner Logo';
+                    // Check if it's a placeholder or a real file path to create alt text
+                    let altText = 'Partner Logo';
+                    if (filePath.includes('placehold.co')) {
+                        try {
+                            altText = decodeURIComponent(filePath.split('=').pop());
+                        } catch (e) { /* use default */ }
+                    } else {
+                        try {
+                            altText = filePath.split('/').pop().split('.')[0].replace(/_/g, ' ');
+                        } catch (e) { /* use default */ }
+                    }
                     
                     // Create the hyperlink
                     const link = document.createElement('a');
@@ -245,9 +284,14 @@
 
                     // Create the image
                     const img = document.createElement('img');
-img.src = filePath;
+                    img.src = filePath;
                     img.alt = altText;
                     img.className = "max-h-20 w-auto object-contain";
+                    // Add error handler for broken image links
+                    img.onerror = () => { 
+                        img.src = `https://placehold.co/150x80/FEF2F2/333?text=Image+Error`;
+                        img.alt = `Error loading ${altText}`;
+                    };
 
                     // Append image to link, and link to grid
                     link.appendChild(img);
