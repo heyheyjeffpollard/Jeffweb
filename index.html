@@ -20,16 +20,21 @@
         }
         
         /* CSS FOR CONTINUOUS SCROLL - HORIZONTAL */
+        /* This animation moves the track one full track-width to the left */
         @keyframes scroll-horizontal {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Move left by half its total width */
+            100% { transform: translateX(-100%); } 
         }
+
+        /* --- FIX FOR ANIMATION JUMP --- */
         
-        /* This is the fix to prevent the "jump" on loop.
-          It tells the browser to optimize for this animation.
+        /* These properties tell the browser to use hardware acceleration (GPU)
+          for the animation, which prevents the "jump" at the end of the loop.
         */
         .logo-track {
             will-change: transform;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
         }
     </style>
 </head>
@@ -64,12 +69,12 @@
                 </p>
                 
                 <!-- 
-                  Container is now borderless and just defines the "window"
-                  for the scroll. It's constrained by the parent max-w-3xl.
+                  Container is now borderless and defines the "window".
+                  NEW: It's now a flex container to hold the two tracks side-by-side.
                 -->
-                <div id="logo-gallery-container" class="relative w-full h-32 md:h-40 overflow-hidden">
+                <div id="logo-gallery-container" class="relative w-full h-32 md:h-40 overflow-hidden flex flex-nowrap">
                     <!-- 
-                      A single 'logo-track' element
+                      TWO identical 'logo-track' elements
                       will be inserted here by JavaScript.
                     -->
                 </div>
@@ -126,7 +131,7 @@
                         <option value="4">4 - Very Good</option>
                         <option value="3">3 - Good</option>
                         <option value="2">2 - Fair</option>
-                        <option valueD="1">1 - Poor</option>
+                        <option value="1">1 - Poor</option>
                     </select>
                 </div>
 
@@ -152,11 +157,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- 1. Dynamic Logo Gallery ---
-            // Rebuilt as a single continuous horizontal marquee
+            // Rebuilt with the "two-track" method for a seamless loop
 
-            // NOTE: This simulates reading from a folder.
-            // In a real-world JS-only app, you must list the files
-            // manually in an array like this.
             const logoFiles = [
                 'https://placehold.co/150x80/EBF4FF/333?text=Logo+One',
                 'https://placehold.co/150x80/FFFBEB/333?text=Logo+Two',
@@ -179,50 +181,48 @@
             if (logoContainer && logoFiles.length > 0) {
                 // Clear any existing content
                 logoContainer.innerHTML = ''; 
-                // Set container class
-                logoContainer.className = 'relative w-full h-32 md:h-40 overflow-hidden';
+                
+                // Set container class - now a flex container
+                logoContainer.className = 'relative w-full h-32 md:h-40 overflow-hidden flex flex-nowrap';
 
                 // 1. Create a function to create a single logo element
                 const createLogoItem = (filePath) => {
                     const altText = filePath.split('=').pop() || 'Partner Logo';
-                    
-                    // Each item is a flex item with a set width
                     const logoWrapper = document.createElement('div');
-                    // 'flex-shrink-0' is important so they don't squash
-                    // 'w-40' gives each logo a consistent width
                     logoWrapper.className = 'flex-shrink-0 w-40 flex items-center justify-center h-32 md:h-40 p-4';
-                    
                     const img = document.createElement('img');
                     img.src = filePath;
                     img.alt = altText;
                     img.className = 'max-h-16 md:max-h-20 w-auto object-contain';
-                    
                     logoWrapper.appendChild(img);
                     return logoWrapper;
                 };
 
-                // 2. Create the single track
-                const track = document.createElement('div');
-                // The track is a flex row that doesn't wrap
-                // We add the 'logo-track' class here for the CSS 'will-change' property
-                track.className = 'flex flex-row flex-nowrap logo-track';
+                // 2. Create the function to build a single track
+                const createTrack = () => {
+                    const track = document.createElement('div');
+                    // Add 'flex-shrink-0' to prevent tracks from squashing
+                    track.className = 'flex flex-row flex-nowrap logo-track flex-shrink-0';
+                    logoFiles.forEach(filePath => {
+                        track.appendChild(createLogoItem(filePath));
+                    });
+                    return track;
+                };
 
-                // 3. Add original set of logos to the track
-                logoFiles.forEach(filePath => {
-                    track.appendChild(createLogoItem(filePath));
-                });
+                // 3. Create two identical tracks
+                const track1 = createTrack();
+                const track2 = createTrack();
 
-                // 4. Add a duplicate set of logos to the track for a seamless loop
-                logoFiles.forEach(filePath => {
-                    track.appendChild(createLogoItem(filePath));
-                });
-
-                // 5. Apply the animation to the track
+                // 4. Apply the animation to both tracks
                 const animationDuration = logoFiles.length * scrollSpeed;
-                track.style.animation = `scroll-horizontal ${animationDuration}s linear infinite`;
+                const animationStyle = `scroll-horizontal ${animationDuration}s linear infinite`;
+                
+                track1.style.animation = animationStyle;
+                track2.style.animation = animationStyle;
 
-                // 6. Add the completed track to the container
-                logoContainer.appendChild(track);
+                // 5. Add both tracks to the container
+                logoContainer.appendChild(track1);
+                logoContainer.appendChild(track2);
             }
             
             
@@ -245,7 +245,7 @@
 
                     // Create the image
                     const img = document.createElement('img');
-                    img.src = filePath;
+img.src = filePath;
                     img.alt = altText;
                     img.className = "max-h-20 w-auto object-contain";
 
@@ -295,7 +295,7 @@
                     setTimeout(() => {
                         form.reset();
                         form.classList.remove('hidden');
-D                        successMessage.classList.add('hidden');
+                        successMessage.classList.add('hidden');
                     }, 5000); // Hide message and show form again after 5 seconds
                 });
             }
