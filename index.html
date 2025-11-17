@@ -191,7 +191,7 @@
                 logoContainer.innerHTML = ''; 
                 
                 // Set container class - now a flex container
-                logoContainer.className = 'relative w-full h-48 md:h-60 overflow-hidden flex flex-nowrap';
+                logoContainer.className = 'relative w-full h-36 md:h-40 overflow-hidden flex flex-nowrap';
 
                 // 1. Create a function to create a single logo element
                 const createLogoItem = (filePath) => {
@@ -214,7 +214,7 @@
                     const img = document.createElement('img');
                     img.src = filePath;
                     img.alt = altText;
-                    img.className = 'max-h-24 md:max-h-30 w-auto object-contain';
+                    img.className = 'max-h-16 md:max-h-20 w-auto object-contain';
                     // Add error handler for broken image links
                     img.onerror = () => { 
                         img.src = `https://placehold.co/150x80/FEF2F2/333?text=Image+Error`;
