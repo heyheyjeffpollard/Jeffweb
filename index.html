@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="media/favicon.png">
     <title>Jeff Pollard | Content Creator</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom font */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
@@ -41,14 +40,13 @@
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
 
-    <!-- Main content container -->
-    <main class="flex flex-col items-center">
+    <!-- Main content container --><main class="flex flex-col items-center">
 
-        <!-- Header / Intro Section -->
-        <header class="w-full flex flex-col items-center text-center p-6 md:p-10">
-            <!-- Profile Image -->
-            <img src="media/profile.png" alt="Jeff Pollard"
-            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Jeff Pollard</h1>
+        <!-- Header / Intro Section --><header class="w-full flex flex-col items-center text-center p-6 md:p-10">
+            <!-- Profile Image --><img src="media/profile.png" alt="Jeff Pollard"
+                 class="w-32 h-32 md:w-40 md:h-40 mb-6"> 
+            
+            <!-- Title --><h1 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Jeff Pollard</h1>
             
             <p class="max-w-3xl text-lg text-gray-700 dark:text-gray-300">
                 Curating stories and visual impact across platforms
@@ -56,26 +54,18 @@
             </p>
         </header>
 
-        <!-- Dynamic Logo Showcase Section -->
-        <!-- This outer section is full-width to center its content. Background color removed. -->
-        <section class="w-full py-10 flex flex-col items-center px-6">
-            <!-- This inner div constrains the content to the uniform width -->
+        <!-- Dynamic Logo Showcase Section --><section class="w-full py-10 flex flex-col items-center px-6">
             <div class="w-full max-w-3xl">
                 <h2 class="text-3xl font-bold text-center mb-2 text-gray-900 dark:text-white">Brands we’ve worked with</h2>
                 <p class="text-center text-gray-600 dark:text-gray-400 mb-8">
                     We spotlight brands, creators, and causes that align with @JeffPollard11’s visual ethos.
                 </p>
                 
-                <!-- 
-                  Container is now borderless and defines the "window".
-                  NEW: It's now a flex container to hold the two tracks side-by-side.
-                -->
                 <div id="logo-gallery-container" class="relative w-full h-32 md:h-40 overflow-hidden flex flex-nowrap">
                     <!-- 
                       TWO identical 'logo-track' elements
                       will be inserted here by JavaScript.
-                    -->
-                </div>
+                    --></div>
                 
                 <div class="text-center mt-8">
                     <button id="toggle-static-gallery" class="px-5 py-2.5 bg-indigo-600 text-white font-medium rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all dark:bg-indigo-500 dark:hover:bg-indigo-600">
@@ -85,43 +75,36 @@
             </div>
         </section>
 
-        <!-- Static Logo Grid Section (Hidden by default) -->
-        <!-- This outer section is full-width to center its content. Background color removed. -->
-        <section id="static-logo-grid-section" class="hidden w-full px-6 py-10 flex flex-col items-center">
-            <!-- This grid is constrained to the uniform width -->
-            <div id="static-logo-grid" class="w-full max-w-3xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+        <!-- Static Logo Grid Section (Hidden by default) --><section id="static-logo-grid-section" class="hidden w-full px-6 py-10 flex flex-col items-center">
+            
+            <div id="static-logo-grid" class="w-full max-w-3xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-2 md:gap-x-8 md:gap-y-3 text-lg">
                 <!-- 
-                  Static, hyperlinked logos
-                  will be inserted here by JavaScript.
-                -->
-            </div>
+                  Static, TEXT-BASED hyperlinks
+                  will be inserted here by JavaScript
+                  from the independent list.
+                --></div>
+
         </section>
 
-        <!-- Feedback Questionnaire Section -->
-        <!-- This section ALREADY had the max-w-3xl and mx-auto for uniform width -->
-        <section class="w-full max-w-3xl mx-auto px-6 py-16">
+        <!-- Feedback Questionnaire Section --><section class="w-full max-w-3xl mx-auto px-6 py-16">
             <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Feedback Questionnaire</h2>
 
-            <!-- Success Message (Hidden by default) -->
-            <div id="form-success-message" class="hidden p-4 mb-6 text-green-800 bg-green-100 border border-green-200 rounded-lg dark:bg-green-900 dark:text-green-200 dark:border-green-700">
+            <!-- Success Message (Hidden by default) --><div id="form-success-message" class="hidden p-4 mb-6 text-green-800 bg-green-100 border border-green-200 rounded-lg dark:bg-green-900 dark:text-green-200 dark:border-green-700">
                 Thank you! Your feedback has been submitted successfully.
             </div>
 
             <form id="feedback-form" class="space-y-6">
-                <!-- Name -->
-                <div>
+                <!-- Name --><div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
                     <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
                 </div>
 
-                <!-- Email -->
-                <div>
+                <!-- Email --><div>
                     <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</LabeL>
                     <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
                 </div>
 
-                <!-- Rating -->
-                <div>
+                <!-- Rating --><div>
                     <label for="rating" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Overall Rating</label>
                     <select id="rating" name="rating" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
                         <option value="" disabled selected>Select a rating...</option>
@@ -133,14 +116,12 @@
                     </select>
                 </div>
 
-                <!-- Comments -->
-                <div>
+                <!-- Comments --><div>
                     <label for="comments" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Comments</label>
                     <textarea id="comments" name="comments" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"></textarea>
                 </div>
 
-                <!-- Submit Button -->
-                <div class="text-center">
+                <!-- Submit Button --><div class="text-center">
                     <button type="submit" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all dark:bg-indigo-500 dark:hover:bg-indigo-600">
                         Submit Feedback
                     </button>
@@ -155,144 +136,124 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- 1. Dynamic Logo Gallery ---
-            // Rebuilt with the "two-track" method for a seamless loop
-
-            // --- THIS IS THE UPDATED LIST ---
-            // It follows your desired order and uses your exact file names.
-            // I've added placeholders for items you mentioned but didn't have files for.
+            
+            // CHANGED: THIS LIST controls the SCROLLING CAROUSEL
+            // You can now edit the href for each logo here.
             const logoFiles = [
-                'media/logos/nickelodeon.png',
-                'media/logos/BLUEVIEW.png',
-                'media/logos/Torrance_Art_Museum.png',
-                //'https://placehold.co/150x80/FEF2F2/333?text=Ragin+Cajun+Cafe', // Placeholder
-                'media/logos/eatsmallsouthbay.png',
-                'media/logos/dollar_hits.png',
-                'media/logos/Project_Barley.png',
-                'media/logos/Black_Raven_Tattoo.png',
-                'media/logos/cropswapla.png',
-                'media/logos/Manhattan Beach Studios.png',
-                //'https://placehold.co/150x80/F0FDF4/333?text=dine+eat+repeat', // Placeholder
-                //'https://placehold.co/150x80/FAF5FF/333?text=Soraya+Zain', // Placeholder
-                //'https://placehold.co/150x80/FFFBEB/333?text=Ruby+Croak', // Placeholder
-                'media/logos/nik_kacy_footwear.png',
-                // --- Other files you provided ---
-                'media/logos/Kappo_Irifune.png',
-                'media/logos/Picnic_with_Me.png'
+                { path: 'media/logos/nickelodeon.png', href: '#' },
+                { path: 'media/logos/BLUEVIEW.png', href: '#' },
+                { path: 'media/logos/Torrance_Art_Museum.png', href: '#' },
+                { path: 'media/logos/eatsmallsouthbay.png', href: '#' },
+                { path: 'media/logos/dollar_hits.png', href: '#' },
+                { path: 'media/logos/Project_Barley.png', href: '#' },
+                { path: 'media/logos/Black_Raven_Tattoo.png', href: '#' },
+                { path: 'media/logos/cropswapla.png', href: '#' },
+                { path: 'media/logos/Manhattan Beach Studios.png', href: '#' },
+                { path: 'media/logos/nik_kacy_footwear.png', href: '#' },
+                { path: 'media/logos/Kappo_Irifune.png', href: '#' },
+                { path: 'media/logos/Picnic_with_Me.png', href: '#' }
+            ];
+
+            // --- 2. Static "Show All" List ---
+            
+            // THIS LIST controls the "Show All" grid
+            const showAllBrands = [
+                { name: 'Nickelodeon', href: '#' },
+                { name: 'Blueview', href: '#' },
+                { name: 'Torrance Art Museum', href: '#' },
+                { name: 'Ragin Cajun Cafe', href: '#' },
+                { name: 'Eat Small South Bay', href: '#' },
+                { name: 'Dollar Hits', href: '#' },
+                { name: 'Project Barley', href: '#' },
+                { name: 'Black Raven Tattoo', href: '#' },
+                { name: 'Crop Swap LA', href: '#' },
+                { name: 'Manhattan Beach Studios', href: '#' },
+                { name: 'Dine Eat Repeat', href: '#' },
+                { name: 'Soraya Zain', href: '#' },
+                { name: 'Ruby Croak', href: '#' },
+                { name: 'Nik Kacy Footwear', href: '#' },
+                { name: 'Kappo Irifune', href: '#' },
+                { name: 'Picnic with Me', href: '#' }
             ];
 
             const logoContainer = document.getElementById('logo-gallery-container');
+            const scrollSpeed = 1; 
 
-            // --- SETTINGS ---
-            const scrollSpeed = 1; // Base speed (seconds per logo)
-            // ----------------
-
+            // --- CAROUSEL POPULATION (Updated) ---
             if (logoContainer && logoFiles.length > 0) {
-                // Clear any existing content
                 logoContainer.innerHTML = ''; 
-                
-                // Set container class - now a flex container
                 logoContainer.className = 'relative w-full h-36 md:h-40 overflow-hidden flex flex-nowrap';
 
-                // 1. Create a function to create a single logo element
-                const createLogoItem = (filePath) => {
-                    // Check if it's a placeholder or a real file path to create alt text
+                // CHANGED: This function now accepts a 'logo' object ({path: '...', href: '...'})
+                const createLogoItem = (logo) => {
                     let altText = 'Partner Logo';
-                    if (filePath.includes('placehold.co')) {
+                    if (logo.path.includes('placehold.co')) {
                         try {
-                            // Try to get text from placeholder URL
-                            altText = decodeURIComponent(filePath.split('=').pop());
+                            altText = decodeURIComponent(logo.path.split('=').pop());
                         } catch (e) { /* use default */ }
                     } else {
-                        // Get filename from path, remove extension
                         try {
-                            altText = filePath.split('/').pop().split('.')[0].replace(/_/g, ' ');
+                            altText = logo.path.split('/').pop().split('.')[0].replace(/_/g, ' ');
                         } catch (e) { /* use default */ }
                     }
 
-                    const logoWrapper = document.createElement('div');
-                    logoWrapper.className = 'flex-shrink-0 w-40 flex items-center justify-center h-32 md:h-40 p-4';
+                    const logoWrapperLink = document.createElement('a');
+                    logoWrapperLink.href = logo.href; // <-- USES THE HREF FROM THE OBJECT
+                    logoWrapperLink.title = `Visit ${altText}`;
+                    logoWrapperLink.target = "_blank";
+                    logoWrapperLink.className = 'flex-shrink-0 w-40 flex items-center justify-center h-32 md:h-40 p-4';
+
                     const img = document.createElement('img');
-                    img.src = filePath;
+                    img.src = logo.path; // <-- USES THE PATH FROM THE OBJECT
                     img.alt = altText;
                     img.className = 'max-h-16 md:max-h-20 w-auto object-contain';
-                    // Add error handler for broken image links
                     img.onerror = () => { 
                         img.src = `https://placehold.co/150x80/FEF2F2/333?text=Image+Error`;
                         img.alt = `Error loading ${altText}`;
                     };
-                    logoWrapper.appendChild(img);
-                    return logoWrapper;
+                    
+                    logoWrapperLink.appendChild(img);
+                    return logoWrapperLink; 
                 };
 
-                // 2. Create the function to build a single track
+                // CHANGED: This loop now passes the entire 'logo' object
                 const createTrack = () => {
                     const track = document.createElement('div');
-                    // Add 'flex-shrink-0' to prevent tracks from squashing
                     track.className = 'flex flex-row flex-nowrap logo-track flex-shrink-0';
-                    logoFiles.forEach(filePath => {
-                        track.appendChild(createLogoItem(filePath));
+                    logoFiles.forEach(logo => {
+                        track.appendChild(createLogoItem(logo));
                     });
                     return track;
                 };
 
-                // 3. Create two identical tracks
                 const track1 = createTrack();
                 const track2 = createTrack();
 
-                // 4. Apply the animation to both tracks
-                // Calculate duration based on the number of items
                 const animationDuration = logoFiles.length * scrollSpeed;
                 const animationStyle = `scroll-horizontal ${animationDuration}s linear infinite`;
                 
                 track1.style.animation = animationStyle;
                 track2.style.animation = animationStyle;
 
-                // 5. Add both tracks to the container
                 logoContainer.appendChild(track1);
                 logoContainer.appendChild(track2);
             }
             
             
-            // --- 2. Static Logo Grid Population ---
+            // --- STATIC GRID POPULATION (Unchanged) ---
             
-            const staticGrid = document.getElementById('static-logo-grid');
-            if (staticGrid && logoFiles.length > 0) {
-                // Clear existing content (just in case)
+            const staticGrid = document.getElementById('static-logo-grid'); 
+            
+            if (staticGrid && showAllBrands.length > 0) {
                 staticGrid.innerHTML = '';
 
-                logoFiles.forEach(filePath => {
-                    // Check if it's a placeholder or a real file path to create alt text
-                    let altText = 'Partner Logo';
-                    if (filePath.includes('placehold.co')) {
-                        try {
-                            altText = decodeURIComponent(filePath.split('=').pop());
-                        } catch (e) { /* use default */ }
-                    } else {
-                        try {
-                            altText = filePath.split('/').pop().split('.')[0].replace(/_/g, ' ');
-                        } catch (e) { /* use default */ }
-                    }
-                    
-                    // Create the hyperlink
+                showAllBrands.forEach(brand => {
                     const link = document.createElement('a');
-                    link.href = "#"; // Placeholder link
-                    link.className = "flex items-center justify-center p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200";
-                    link.target = "_blank"; // Open in new tab
-                    link.title = `Visit ${altText}`;
-
-                    // Create the image
-                    const img = document.createElement('img');
-                    img.src = filePath;
-                    img.alt = altText;
-                    img.className = "max-h-20 w-auto object-contain";
-                    // Add error handler for broken image links
-                    img.onerror = () => { 
-                        img.src = `https://placehold.co/150x80/FEF2F2/333?text=Image+Error`;
-                        img.alt = `Error loading ${altText}`;
-                    };
-
-                    // Append image to link, and link to grid
-                    link.appendChild(img);
+                    link.href = brand.href; 
+                    link.target = "_blank";
+                    link.textContent = brand.name; 
+                    link.className = "block p-1 text-center text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium"; 
+                    
                     staticGrid.appendChild(link);
                 });
             }
@@ -322,23 +283,17 @@
 
             if (form && successMessage) {
                 form.addEventListener('submit', (e) => {
-                    e.preventDefault(); // Stop the form from actually submitting
+                    e.preventDefault(); 
                     
-                    // Show the success message
                     successMessage.classList.remove('hidden');
-                    
-                    // Hide the form
                     form.classList.add('hidden');
-                    
-                    // Optional: Scroll to the success message
                     successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     
-                    // Optional: Reset the form after a delay
                     setTimeout(() => {
                         form.reset();
                         form.classList.remove('hidden');
                         successMessage.classList.add('hidden');
-                    }, 5000); // Hide message and show form again after 5 seconds
+                    }, 5000); 
                 });
             }
 
