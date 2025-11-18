@@ -43,8 +43,8 @@
     <!-- Main content container --><main class="flex flex-col items-center">
 
         <!-- Header / Intro Section --><header class="w-full flex flex-col items-center text-center p-6 md:p-10">
-            <!-- Profile Image --><img src="media/profile.png" alt="Jeff Pollard"
-                 class="w-32 md:w-40 h-auto mb-6"> 
+            <!-- Profile Image - CHANGED: width to match text body, removed fixed height --><img src="media/profile.png" alt="Jeff Pollard"
+                 class="w-full max-w-3xl h-auto mb-6"> 
             
             <!-- Title --><h1 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Jeff Pollard</h1>
             
@@ -87,13 +87,9 @@
         </section>
 
         <!-- Contact Form Section --><section class="w-full max-w-3xl mx-auto px-6 py-16">
-            <!-- CHANGED: Title updated -->
-            <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Contact Form</h2>
+            <!-- CHANGED: Title updated --><h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Contact Form</h2>
 
-            <!-- REMOVED: Success Message Div -->
-
-            <!-- CHANGED: Added method and action for Formspree. Remember to replace YOUR_FORM_ID! -->
-            <form id="feedback-form" action="https://formspree.io/f/mpwbazpy" method="POST" class="space-y-6">
+            <!-- REMOVED: Success Message Div --><!-- CHANGED: Added method and action for Formspree. Remember to replace YOUR_FORM_ID! --><form id="feedback-form" action="https://formspree.io/f/mpwbazpy" method="POST" class="space-y-6">
                 <!-- Name --><div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
                     <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
@@ -104,11 +100,8 @@
                     <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
                 </div>
 
-                <!-- REMOVED: Rating Section -->
-
-                <!-- Intro Message --><div>
-                    <!-- CHANGED: Label text, 'for', 'id', and 'name' updated. Added 'required' -->
-                    <label for="intro-message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Intro Message</label>
+                <!-- REMOVED: Rating Section --><!-- Intro Message --><div>
+                    <!-- CHANGED: Label text, 'for', 'id', and 'name' updated. Added 'required' --><label for="intro-message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Intro Message</label>
                     <textarea id="intro-message" name="intro-message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"></textarea>
                 </div>
 
@@ -148,23 +141,120 @@
             
             // THIS LIST controls the "Show All" grid
             const showAllBrands = [
-                { name: 'Nickelodeon', href: '#' },
-                { name: 'Blueview', href: '#' },
-                { name: 'Torrance Art Museum', href: '#' },
-                { name: 'Ragin Cajun Cafe', href: '#' },
-                { name: 'Eat Small South Bay', href: '#' },
-                { name: 'Dollar Hits', href: '#' },
-                { name: 'Project Barley', href: '#' },
+                { name: '@chloe_twitch', href: '#' },
+                { name: '0debris', href: '#' },
+                { name: '18ten Magic and Dance Studio', href: '#' },
+                { name: 'Activity Pointe', href: '#' },
+                { name: 'Adam Schwartz', href: '#' },
+                { name: 'America\'s Trophy Co 2', href: '#' },
+                { name: 'America\'s Trophy Company', href: '#' },
+                { name: 'Ana Moreno - Only Fans Gal', href: '#' },
+                { name: 'Andrea Berman', href: '#' },
+                { name: 'At E\'s Massage', href: '#' },
+                { name: 'Aussie Pet Mobile', href: '#' },
+                { name: 'Behavioral Therapist Michael Oden', href: '#' },
                 { name: 'Black Raven Tattoo', href: '#' },
-                { name: 'Crop Swap LA', href: '#' },
-                // FIXED: Removed extra 'E:' from the property name
-                { name: 'Manhattan Beach Studios', href: '#' },
-                { name: 'Dine Eat Repeat', href: '#' },
-                { name: 'Soraya Zain', href: '#' },
-                { name: 'Ruby Croak', href: '#' },
-                { name: 'Nik Kacy Footwear', href: '#' },
+                { name: 'Blai Herinn\'s Tommy Knuts', href: '#' },
+                { name: 'Blue View', href: '#' },
+                { name: 'Blueview', href: '#' },
+                { name: 'Bonnie Got Juice', href: '#' },
+                { name: 'Brilla Samay Astrology', href: '#' },
+                { name: 'Caketails', href: '#' },
+                { name: 'Captain Kevin Mcquiston', href: '#' },
+                { name: 'Carol Schreiner', href: '#' },
+                { name: 'Chefsforseniors', href: '#' },
+                { name: 'Coco Shin', href: '#' },
+                { name: 'Coconut Smiles', href: '#' },
+                { name: 'Corky Carroll', href: '#' },
+                { name: 'Corky Carroll Bluemmango', href: '#' },
+                { name: 'Crescent and Stone', href: '#' },
+                { name: 'Crop Swap La Jamiah Hargins', href: '#' },
+                { name: 'Dane Myers', href: '#' },
+                { name: 'Danceweaver', href: '#' },
+                { name: 'Dave Kincaid', href: '#' },
+                { name: 'Debika Sen', href: '#' },
+                { name: 'Didi Mogrobejo', href: '#' },
+                { name: 'Dollar Hits', href: '#' },
+                { name: 'Dr. Heidi Smith', href: '#' },
+                { name: 'Dr. Michelle Han', href: '#' },
+                { name: 'Dudley\'s Records', href: '#' },
+                { name: 'Dyinsf', href: '#' },
+                { name: 'Eat Small South Bay', href: '#' },
+                { name: 'Eduard Sargsyan', href: '#' },
+                { name: 'Emily Tanaka', href: '#' },
+                { name: 'Erik\'s Way', href: '#' },
+                { name: 'Eskrimador Fighting', href: '#' },
+                { name: 'Ethos Jiu-jitsu', href: '#' },
+                { name: 'Fashion Revolution Mexico', href: '#' },
+                { name: 'Food2soil', href: '#' },
+                { name: 'Forefront Media', href: '#' },
+                { name: 'Gina Herrera', href: '#' },
+                { name: 'Great Officiants', href: '#' },
+                { name: 'Hearaid Foundation', href: '#' },
+                { name: 'Honey Pour', href: '#' },
+                { name: 'Jack Sollecito', href: '#' },
+                { name: 'Jeannie Lin Dancing', href: '#' },
+                { name: 'Jeff Koven Koven Productions', href: '#' },
+                { name: 'Jenn.abides', href: '#' },
+                { name: 'Jennifer Aponte', href: '#' },
+                { name: 'Jennsgemss', href: '#' },
+                { name: 'Joy Miyatake', href: '#' },
                 { name: 'Kappo Irifune', href: '#' },
-                { name: 'Picnic with Me', href: '#' }
+                { name: 'Kefi Yoga', href: '#' },
+                { name: 'Kreativecards', href: '#' },
+                { name: 'Laura Lockwood', href: '#' },
+                { name: 'Leilani Aquino', href: '#' },
+                { name: 'Lifeline Walk In Clinic', href: '#' },
+                { name: 'Lisette Thierry', href: '#' },
+                { name: 'Lucky Louie\'s Bartending', href: '#' },
+                { name: 'Mj Entertainment Unlimited', href: '#' },
+                { name: 'Manhattan Beach Studios', href: '#' },
+                { name: 'Maria Shapley', href: '#' },
+                { name: 'Maricel Rocha', href: '#' },
+                { name: 'Michelle Jaeger Jones', href: '#' },
+                { name: 'Mike Garcia', href: '#' },
+                { name: 'Moonshine Music', href: '#' },
+                { name: 'Nick Mattic', href: '#' },
+                { name: 'Nickelodeon', href: '#' },
+                { name: 'Nik Kacy', href: '#' },
+                { name: 'Nina Segedin', href: '#' },
+                { name: 'Omg Vegan Donuts', href: '#' },
+                { name: 'Paddle4plastic', href: '#' },
+                { name: 'Palos Verdes Pulse', href: '#' },
+                { name: 'Picnic With Me', href: '#' },
+                { name: 'Pretty Kool Treats', href: '#' },
+                { name: 'Project Barley', href: '#' },
+                { name: 'Ragin Cajun Cafe', href: '#' },
+                { name: 'Ralph Dorwin - Santa', href: '#' },
+                { name: 'Red Cell Project', href: '#' },
+                { name: 'Rhonda Jackson Studio D', href: '#' },
+                { name: 'Rhonda Linn', href: '#' },
+                { name: 'Robb Briggs', href: '#' },
+                { name: 'Rocktoberfest', href: '#' },
+                { name: 'Rose Donato', href: '#' },
+                { name: 'Ruby Croak', href: '#' },
+                { name: 'Ruby Vartan', href: '#' },
+                { name: 'Seawitch', href: '#' },
+                { name: 'Shant Baboujian', href: '#' },
+                { name: 'Shoebox', href: '#' },
+                { name: 'Skylar London Body Butters and Beyond', href: '#' },
+                { name: 'Soraya Zain', href: '#' },
+                { name: 'Still Got It Fitness', href: '#' }, // <-- FIXED: Removed stray 'AN ' from this line
+                { name: 'Storied', href: '#' },
+                { name: 'Street Racing Kills', href: '#' },
+                { name: 'Sunflower Nannies', href: '#' },
+                { name: 'Sustainable Shane', href: '#' },
+                { name: 'The Backyard Training', href: '#' },
+                { name: 'The Golden Triangle', href: '#' },
+                { name: 'The Wild Owl Beauty The Artists\' Studio of Palos Verdes', href: '#' },
+                { name: 'Tinys Designs', href: '#' },
+                { name: 'Toca', href: '#' },
+                { name: 'Torrance Art Museum', href: '#' },
+                { name: 'Transformational Life Coach and Transcendance Facilitator', href: '#' },
+                { name: 'Various Artist David, Katie, Jennifer', href: '#' },
+                { name: 'Vida Kitchen', href: '#' },
+                { name: 'Wecomposting', href: '#' },
+                { name: 'Wellness Coach and Hypnotherapist Alina Ugas', href: '#' }
             ];
 
             const logoContainer = document.getElementById('logo-gallery-container');
