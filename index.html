@@ -51,7 +51,7 @@
 
         <!-- Dynamic Logo Showcase Section --><section class="w-full py-10 flex flex-col items-center px-6">
             <div class="w-full max-w-3xl">
-                <h2 class="text-3xl font-bold text-center mb-2 text-gray-900 dark:text-white">Brands we’ve worked with</h2>
+                <h2 class="text-2xl font-bold text-center mb-2 text-gray-900 dark:text-white">Brands we’ve worked with</h2>
                 <p class="text-center text-gray-600 dark:text-gray-400 mb-8">
                     We spotlight brands, creators, and causes that align with @JeffPollard11’s visual ethos.
                 </p>
@@ -117,8 +117,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- 1. Dynamic Logo Gallery ---
+            
+            // THIS LIST controls the SCROLLING CAROUSEL
             const logoFiles = [
-                { path: 'media/logos/nickelodeon.png', href: 'https://www.nick.com/' },
+                { path: 'media/logos/nickelodeon.png', href: '#' },
                 { path: 'media/logos/BLUEVIEW.png', href: '#' },
                 { path: 'media/logos/Torrance_Art_Museum.png', href: '#' },
                 { path: 'media/logos/eatsmallsouthbay.png', href: '#' },
@@ -133,6 +135,10 @@
             ];
 
             // --- 2. Static "Show All" List ---
+            
+            // THIS LIST controls the "Show All" grid
+            // This is the complete, de-duplicated list, in order,
+            // ready for you to edit the href: '#' links.
             const showAllBrands = [
                 { name: 'Nickelodeon', href: '#' },
                 { name: 'Blueview', href: '#' },
@@ -252,6 +258,7 @@
                 { name: 'Jeannie Lin Dancing', href: '#' },
                 { name: 'Nik Kacy', href: '#' }
             ];
+
 
             const logoContainer = document.getElementById('logo-gallery-container');
             const scrollSpeed = 1; 
