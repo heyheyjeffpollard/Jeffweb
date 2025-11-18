@@ -50,7 +50,7 @@
             
             <p class="max-w-3xl text-lg text-gray-700 dark:text-gray-300">
                 Curating stories and visual impact across platforms
-                Jeff Pollard is a content creator and digital storyteller based in Los Angeles. He helps brands, creators, and causes bring their vision to life through bold visuals and authentic storytelling. Whether behind the camera or leading a campaign, his work focuses on creating meaningful connections and inspiring audiences. His creative journey began within the film industry and a curiosity for how stories shape culture. Over the years, Jeff has collaborated with artists, entrepreneurs, and organizations that share a passion for creativity and purpose. He has been featured in publications like ShoutOut LA and continues to seek out compelling stories that deserve the spotlight.
+                Jeff Pollard is a content creator and digital storyteller based in Los Angeles. He helps brands, creators, and causes bring their vision to life through bold visuals and authentic storytelling. Whether behind the camera or leading a campaign, his work focuses on creating meaningful connections and inspiring audiences. His creative journey began within the film industry and a curiosity for how stories shape culture. Over the years, Jeff has collaborated with artists, entrepreneurs, and organizations that share a passion for creativity and purpose. He has been featured in publications like ShoutOut LA and and continues to seek out compelling stories that deserve the spotlight.
             </p>
         </header>
 
@@ -86,14 +86,14 @@
 
         </section>
 
-        <!-- Feedback Questionnaire Section --><section class="w-full max-w-3xl mx-auto px-6 py-16">
-            <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Feedback Questionnaire</h2>
+        <!-- Contact Form Section --><section class="w-full max-w-3xl mx-auto px-6 py-16">
+            <!-- CHANGED: Title updated -->
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Contact Form</h2>
 
-            <!-- Success Message (Hidden by default) --><div id="form-success-message" class="hidden p-4 mb-6 text-green-800 bg-green-100 border border-green-200 rounded-lg dark:bg-green-900 dark:text-green-200 dark:border-green-700">
-                Thank you! Your feedback has been submitted successfully.
-            </div>
+            <!-- REMOVED: Success Message Div -->
 
-            <form id="feedback-form" class="space-y-6">
+            <!-- CHANGED: Added method and action for Formspree. Remember to replace YOUR_FORM_ID! -->
+            <form id="feedback-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-6">
                 <!-- Name --><div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
                     <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
@@ -104,26 +104,17 @@
                     <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
                 </div>
 
-                <!-- Rating --><div>
-                    <label for="rating" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Overall Rating</label>
-                    <select id="rating" name="rating" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
-                        <option value="" disabled selected>Select a rating...</option>
-                        <option value="5">5 - Excellent</option>
-                        <option value="4">4 - Very Good</option>
-                        <option value="3">3 - Good</option>
-                        <option value="2">2 - Fair</option>
-                        <option value="1">1 - Poor</option>
-                    </select>
-                </div>
+                <!-- REMOVED: Rating Section -->
 
-                <!-- Comments --><div>
-                    <label for="comments" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Comments</label>
-                    <textarea id="comments" name="comments" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"></textarea>
+                <!-- Intro Message --><div>
+                    <!-- CHANGED: Label text, 'for', 'id', and 'name' updated. Added 'required' -->
+                    <label for="intro-message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Intro Message</label>
+                    <textarea id="intro-message" name="intro-message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"></textarea>
                 </div>
 
                 <!-- Submit Button --><div class="text-center">
                     <button type="submit" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all dark:bg-indigo-500 dark:hover:bg-indigo-600">
-                        Submit Feedback
+                        Submit
                     </button>
                 </div>
             </form>
@@ -137,8 +128,7 @@
             
             // --- 1. Dynamic Logo Gallery ---
             
-            // CHANGED: THIS LIST controls the SCROLLING CAROUSEL
-            // You can now edit the href for each logo here.
+            // THIS LIST controls the SCROLLING CAROUSEL
             const logoFiles = [
                 { path: 'media/logos/nickelodeon.png', href: '#' },
                 { path: 'media/logos/BLUEVIEW.png', href: '#' },
@@ -167,6 +157,7 @@
                 { name: 'Project Barley', href: '#' },
                 { name: 'Black Raven Tattoo', href: '#' },
                 { name: 'Crop Swap LA', href: '#' },
+                // FIXED: Removed extra 'E:' from the property name
                 { name: 'Manhattan Beach Studios', href: '#' },
                 { name: 'Dine Eat Repeat', href: '#' },
                 { name: 'Soraya Zain', href: '#' },
@@ -179,12 +170,11 @@
             const logoContainer = document.getElementById('logo-gallery-container');
             const scrollSpeed = 1; 
 
-            // --- CAROUSEL POPULATION (Updated) ---
+            // --- CAROUSEL POPULATION ---
             if (logoContainer && logoFiles.length > 0) {
                 logoContainer.innerHTML = ''; 
                 logoContainer.className = 'relative w-full h-36 md:h-40 overflow-hidden flex flex-nowrap';
 
-                // CHANGED: This function now accepts a 'logo' object ({path: '...', href: '...'})
                 const createLogoItem = (logo) => {
                     let altText = 'Partner Logo';
                     if (logo.path.includes('placehold.co')) {
@@ -198,13 +188,13 @@
                     }
 
                     const logoWrapperLink = document.createElement('a');
-                    logoWrapperLink.href = logo.href; // <-- USES THE HREF FROM THE OBJECT
+                    logoWrapperLink.href = logo.href; 
                     logoWrapperLink.title = `Visit ${altText}`;
                     logoWrapperLink.target = "_blank";
                     logoWrapperLink.className = 'flex-shrink-0 w-40 flex items-center justify-center h-32 md:h-40 p-4';
 
                     const img = document.createElement('img');
-                    img.src = logo.path; // <-- USES THE PATH FROM THE OBJECT
+                    img.src = logo.path; 
                     img.alt = altText;
                     img.className = 'max-h-16 md:max-h-20 w-auto object-contain';
                     img.onerror = () => { 
@@ -216,7 +206,6 @@
                     return logoWrapperLink; 
                 };
 
-                // CHANGED: This loop now passes the entire 'logo' object
                 const createTrack = () => {
                     const track = document.createElement('div');
                     track.className = 'flex flex-row flex-nowrap logo-track flex-shrink-0';
@@ -240,7 +229,7 @@
             }
             
             
-            // --- STATIC GRID POPULATION (Unchanged) ---
+            // --- STATIC GRID POPULATION ---
             
             const staticGrid = document.getElementById('static-logo-grid'); 
             
@@ -278,24 +267,7 @@
             }
 
             // --- 4. Form Submission Handler ---
-            const form = document.getElementById('feedback-form');
-            const successMessage = document.getElementById('form-success-message');
-
-            if (form && successMessage) {
-                form.addEventListener('submit', (e) => {
-                    e.preventDefault(); 
-                    
-                    successMessage.classList.remove('hidden');
-                    form.classList.add('hidden');
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    setTimeout(() => {
-                        form.reset();
-                        form.classList.remove('hidden');
-                        successMessage.classList.add('hidden');
-                    }, 5000); 
-                });
-            }
+            // REMOVED: Custom JS submission handler. Formspree will handle it.
 
         });
     </script>
