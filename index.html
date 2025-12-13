@@ -1,3 +1,7 @@
+<!-- 
+    Version: 1.2
+    Most Recent Change: Added Maintenance/Under Construction mode toggle.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="media/favicon.png">
     <title>Jeff Pollard | Content Creator</title>
+
+    <!-- CONFIGURATION -->
+    <script>
+        // Set to true to show "Under Construction" page
+        const MAINTENANCE_MODE = false;
+    </script>
+    
     <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom font */
@@ -40,7 +51,22 @@
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
 
-    <!-- Main content container --><main class="flex flex-col items-center">
+    <!-- UNDER CONSTRUCTION OVERLAY (Hidden by default) -->
+    <div id="maintenance-overlay" class="hidden fixed inset-0 z-50 bg-gray-900 text-white flex flex-col items-center justify-center p-4">
+        <div class="text-center max-w-2xl">
+            <!-- Optional: You can uncomment the image below to show your profile pic here too -->
+            <!-- <img src="media/profile.png" alt="Jeff Pollard" class="w-32 h-auto mx-auto mb-8 opacity-80"> -->
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Under Construction</h1>
+            <div class="w-24 h-1 bg-indigo-500 mx-auto mb-8"></div>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10">
+                We are currently making some improvements to the site. <br class="hidden md:block">Please check back soon.
+            </p>
+            <p class="text-gray-500">Jeff Pollard | Content Creator</p>
+        </div>
+    </div>
+
+    <!-- Main content container --><main id="main-content" class="flex flex-col items-center">
 
         <!-- Header / Intro Section --><header class="w-full flex flex-col items-center text-center p-6 md:p-10">
             <!-- Profile Image - CHANGED: width to match text body, removed fixed height --><img src="media/profile.png" alt="Jeff Pollard"
@@ -62,10 +88,7 @@
                 </p>
                 
                 <div id="logo-gallery-container" class="relative w-full h-32 md:h-40 overflow-hidden flex flex-nowrap">
-                    <!-- 
-                      TWO identical 'logo-track' elements
-                      will be inserted here by JavaScript.
-                    --></div>
+                    <!-- Tracks inserted by JS --></div>
                 
                 <div class="text-center mt-8">
                     <button id="toggle-static-gallery" class="px-5 py-2.5 bg-indigo-600 text-white font-medium rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all dark:bg-indigo-500 dark:hover:bg-indigo-600">
@@ -78,18 +101,22 @@
         <!-- Static Logo Grid Section (Hidden by default) --><section id="static-logo-grid-section" class="hidden w-full px-6 py-10 flex flex-col items-center">
             
             <div id="static-logo-grid" class="w-full max-w-3xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-2 md:gap-x-8 md:gap-y-3 text-lg">
-                <!-- 
-                  Static, TEXT-BASED hyperlinks
-                  will be inserted here by JavaScript
-                  from the independent list.
-                --></div>
+                <!-- Text links inserted by JS --></div>
 
         </section>
 
         <!-- Contact Form Section --><section class="w-full max-w-3xl mx-auto px-6 py-16">
-            <!-- CHANGED: Title updated --><h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Contact Form</h2>
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Contact Form</h2>
 
-            <!-- REMOVED: Success Message Div --><!-- CHANGED: Added method and action for Formspree. Remember to replace YOUR_FORM_ID! --><form id="feedback-form" action="https://formspree.io/f/mpwbazpy" method="POST" class="space-y-6">
+            <!-- Success/Error Messages -->
+            <div id="form-success-message" class="hidden p-4 mb-6 text-green-800 bg-green-100 border border-green-200 rounded-lg dark:bg-green-900 dark:text-green-200 dark:border-green-700">
+                Form submitted! Thank you.
+            </div>
+            <div id="form-error-message" class="hidden p-4 mb-6 text-red-800 bg-red-100 border border-red-200 rounded-lg dark:bg-red-900 dark:text-red-200 dark:border-red-700">
+                Oops! Something went wrong. Please try again.
+            </div>
+
+            <form id="feedback-form" action="https://formspree.io/f/mpwbazpy" method="POST" class="space-y-6">
                 <!-- Name --><div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
                     <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
@@ -100,13 +127,14 @@
                     <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
                 </div>
 
-                <!-- REMOVED: Rating Section --><!-- Intro Message --><div>
-                    <!-- CHANGED: Label text, 'for', 'id', and 'name' updated. Added 'required' --><label for="intro-message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Intro Message</label>
+                <!-- Intro Message --><div>
+                    <label for="intro-message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Intro Message</label>
                     <textarea id="intro-message" name="intro-message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"></textarea>
                 </div>
 
-                <!-- Submit Button --><div class="text-center">
-                    <button type="submit" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all dark:bg-indigo-500 dark:hover:bg-indigo-600">
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" id="form-submit-button" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all dark:bg-indigo-500 dark:hover:bg-indigo-600">
                         Submit
                     </button>
                 </div>
@@ -119,11 +147,10 @@
             <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">It Goes a Long Way</p>
             
             <div class="flex flex-wrap justify-center gap-8 items-center">
-                <!-- Instagram (Official Gradient) -->
+                <!-- Instagram -->
                 <a href="https://www.instagram.com/jeffpollard11" target="_blank" title="@jeffpollard11" 
                    class="transform hover:scale-110 transition-transform duration-300">
                     <span class="sr-only">Instagram</span>
-                    <!-- Official Gradient SVG -->
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <radialGradient id="ig_grad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(7.5 23) rotate(-58.5) scale(24.5)">
@@ -138,7 +165,7 @@
                     </svg>
                 </a>
 
-                <!-- YouTube 1: Hey Hey South Bay (Official Red) -->
+                <!-- YouTube 1 -->
                 <a href="https://youtube.com/@heyheysouthbay?si=kDGqO9AggIZliPtr" target="_blank" title="@heyheysouthbay"
                    class="transform hover:scale-110 transition-transform duration-300">
                     <span class="sr-only">YouTube @heyheysouthbay</span>
@@ -148,7 +175,7 @@
                     </svg>
                 </a>
 
-                <!-- YouTube 2: Hey Hey Jeff Pollard (Official Red) -->
+                <!-- YouTube 2 -->
                 <a href="https://youtube.com/@heyheyjeffpollard?si=AB5a_eZoWpDD-d8M" target="_blank" title="@heyheyjeffpollard"
                    class="transform hover:scale-110 transition-transform duration-300">
                     <span class="sr-only">YouTube @heyheyjeffpollard</span>
@@ -158,7 +185,7 @@
                     </svg>
                 </a>
 
-                <!-- TikTok (Official Black/White) -->
+                <!-- TikTok -->
                 <a href="https://www.tiktok.com/@jeffpollard11" target="_blank" title="@jeffpollard11"
                    class="transform hover:scale-110 transition-transform duration-300">
                     <span class="sr-only">TikTok</span>
@@ -172,12 +199,17 @@
     </main>
 
     <script>
-        // Wait for the DOM to be fully loaded before running scripts
         document.addEventListener('DOMContentLoaded', () => {
             
+            // Check maintenance mode first
+            if (MAINTENANCE_MODE) {
+                document.getElementById('maintenance-overlay').classList.remove('hidden');
+                document.getElementById('main-content').classList.add('hidden');
+                // Optional: Stop further execution if you don't want animations running in background
+                return; 
+            }
+
             // --- 1. Dynamic Logo Gallery ---
-            
-            // THIS LIST controls the SCROLLING CAROUSEL
             const logoFiles = [
                 { path: 'media/logos/nickelodeon.png', href: '#' },
                 { path: 'media/logos/BLUEVIEW.png', href: '#' },
@@ -194,8 +226,124 @@
             ];
 
             // --- 2. Static "Show All" List ---
-            
-            // THIS LIST controls the "Show All" grid
+            // Converted to object array so you can add links for each brand.
+            const rawBrandNames = [
+                { name: 'Nickelodeon', link: '#' },
+                { name: 'Blueview', link: '#' },
+                { name: 'Torrance Art Museum', link: '#' },
+                { name: 'Kappo Irifune', link: '#' },
+                { name: 'Black Raven Tattoo', link: '#' },
+                { name: 'Rocktoberfest', link: '#' },
+                { name: 'The Backyard Training', link: '#' },
+                { name: 'Picnic with Me', link: '#' },
+                { name: 'Paddle4plastic', link: '#' },
+                { name: 'Activity Pointe', link: '#' },
+                { name: 'Ragin Cajun Cafe', link: '#' },
+                { name: 'Tinys Designs', link: '#' },
+                { name: 'MJ Entertainment Unlimited', link: '#' },
+                { name: 'Pretty Kool Treats', link: '#' },
+                { name: 'Skylar London Body Butters and Beyond', link: '#' },
+                { name: 'Kreativecards', link: '#' },
+                { name: 'Omg Vegan Donuts', link: '#' },
+                { name: 'Caketails', link: '#' },
+                { name: 'Brilla Samay Astrology', link: '#' },
+                { name: 'Aussie Pet Mobile', link: '#' },
+                { name: 'America\'s Trophy Company', link: '#' },
+                { name: 'Joy Miyatake', link: '#' },
+                { name: 'Moonshine Music', link: '#' },
+                { name: 'Adam Schwartz', link: '#' },
+                { name: 'Transformational Life Coach and Transcendance Facilitator', link: '#' },
+                { name: 'Emily Tanaka', link: '#' },
+                { name: 'Kefi Yoga', link: '#' },
+                { name: 'Eat Small South Bay', link: '#' },
+                { name: 'Corky Carroll Bluemmango', link: '#' },
+                { name: 'Crop Swap LA Jamiah Hargins', link: '#' },
+                { name: 'Dudley\'s Records', link: '#' },
+                { name: '18ten Magic and Dance Studio', link: '#' },
+                { name: 'Captain Kevin McQuiston', link: '#' },
+                { name: 'Jeff Koven Koven Productions', link: '#' },
+                { name: 'Manhattan Beach Studios', link: '#' },
+                { name: 'Street Racing Kills', link: '#' },
+                { name: 'The Golden Triangle', link: '#' },
+                { name: 'Debika Sen', link: '#' },
+                { name: 'Project Barley', link: '#' },
+                { name: 'Still Got It Fitness', link: '#' },
+                { name: 'Dr. Heidi Smith', link: '#' },
+                { name: 'Eskrimador Fighting', link: '#' },
+                { name: 'Palos Verdes Pulse', link: '#' },
+                { name: 'Eduard Sargsyan', link: '#' },
+                { name: 'Michelle Jaeger Jones', link: '#' },
+                { name: 'Crescent and Stone', link: '#' },
+                { name: 'Hearaid Foundation', link: '#' },
+                { name: 'Wellness Coach and Hypnotherapist Alina Ugas', link: '#' },
+                { name: 'Behavioral Therapist Michael Oden', link: '#' },
+                { name: 'Great Officiants', link: '#' },
+                { name: 'Forefront Media', link: '#' },
+                { name: 'Leilani Aquino', link: '#' },
+                { name: 'The Wild Owl Beauty The Artists\' Studio of Palos Verdes', link: '#' },
+                { name: 'At E\'s Massage', link: '#' },
+                { name: 'Lifeline Walk In Clinic', link: '#' },
+                { name: 'Ethos Jiu-Jitsu', link: '#' },
+                { name: 'Coconut Smiles', link: '#' },
+                { name: 'Maricel Rocha', link: '#' },
+                { name: 'Chefsforseniors', link: '#' },
+                { name: 'Ralph Dorwin - santa', link: '#' },
+                { name: 'Erik\'s Way', link: '#' },
+                { name: 'Vida Kitchen', link: '#' },
+                { name: 'Honey Pour', link: '#' },
+                { name: 'America\'s Trophy Co 2', link: '#' },
+                { name: 'Dane Myers', link: '#' },
+                { name: 'Rose Donato', link: '#' },
+                { name: 'Carol Schreiner', link: '#' },
+                { name: 'Nina Segedin', link: '#' },
+                { name: 'Mike Garcia', link: '#' },
+                { name: 'Jennifer Aponte', link: '#' },
+                { name: 'Wecomposting', link: '#' },
+                { name: 'Dave Kincaid', link: '#' },
+                { name: 'Red Cell Project', link: '#' },
+                { name: 'Coco Shin', link: '#' },
+                { name: 'Blai Herinn\'s Tommy Knuts', link: '#' },
+                { name: '@Chloe_twitch', link: '#' },
+                { name: 'Soraya Zain', link: '#' },
+                { name: 'Rhonda Linn', link: '#' },
+                { name: 'Food2Soil', link: '#' },
+                { name: 'Bonnie Got Juice', link: '#' },
+                { name: 'toca', link: '#' },
+                { name: 'jennsgemss', link: '#' },
+                { name: 'seawitch', link: '#' },
+                { name: 'dyinsf', link: '#' },
+                { name: 'Robb Briggs', link: '#' },
+                { name: 'Blue View', link: '#' },
+                { name: 'Sustainable shane', link: '#' },
+                { name: 'Ana Moreno', link: '#' },
+                { name: 'Didi Mogrobejo', link: '#' },
+                { name: 'Jack Sollecito', link: '#' },
+                { name: 'Fashion Revolution Mexico', link: '#' },
+                { name: '0Debris', link: '#' },
+                { name: 'Maria Shapley', link: '#' },
+                { name: 'Shant Baboujian', link: '#' },
+                { name: 'dr. michelle han', link: '#' },
+                { name: 'nick mattic', link: '#' },
+                { name: 'corky carroll', link: '#' },
+                { name: 'gina herrera', link: '#' },
+                { name: 'Laura Lockwood', link: '#' },
+                { name: 'Rhonda Jackson Studio D', link: '#' },
+                { name: 'Sunflower Nannies', link: '#' },
+                { name: 'Storied', link: '#' },
+                { name: 'Lucky Louie\'s Bartending', link: '#' },
+                { name: 'Lisette Thierry', link: '#' },
+                { name: 'Various artist david, katie, jennifer', link: '#' },
+                { name: 'Andrea Berman', link: '#' },
+                { name: 'Danceweaver', link: '#' },
+                { name: 'Ruby Vartan', link: '#' },
+                { name: 'Jenn.abides', link: '#' },
+                { name: 'Shoebox', link: '#' },
+                { name: 'Jeannie Lin dancing', link: '#' },
+                { name: 'Ruby Croak', link: '#' },
+                { name: 'Dollar Hits', link: '#' },
+                { name: 'Nik Kacy', link: '#' }
+            ];
+
             // Helper function to capitalize names
             const capitalize = (s) => {
                 if (typeof s !== 'string') return '';
@@ -207,55 +355,33 @@
                 }).join(' ');
             };
 
-            // Raw list of names provided
-            const rawBrandNames = [
-                'Nickelodeon', 'Blueview', 'Torrance Art Museum', 'Kappo Irifune', 'Black Raven Tattoo',
-                'Rocktoberfest', 'The Backyard Training', 'Picnic with Me', 'Torrance Art Museum', 'Paddle4plastic',
-                'Activity Pointe', 'Ragin Cajun Cafe', 'Tinys Designs', 'MJ Entertainment Unlimited',
-                'Pretty Kool Treats', 'Skylar London Body Butters and Beyond', 'Kreativecards', 'Omg Vegan Donuts',
-                'Caketails', 'Brilla Samay Astrology', 'Aussie Pet Mobile', 'America\'s Trophy Company',
-                'Joy Miyatake', 'Moonshine Music', 'Adam Schwartz', 'Transformational Life Coach and Transcendance Facilitator',
-                'Emily Tanaka', 'Kefi Yoga', 'Eat Small South Bay', 'Corky Carroll Bluemmango',
-                'Crop Swap LA Jamiah Hargins', 'Dudley\'s Records', '18ten Magic and Dance Studio', 'Captain Kevin McQuiston',
-                'Jeff Koven Koven Productions', 'Manhattan Beach Studios', 'Street Racing Kills', 'The Golden Triangle',
-                'Debika Sen', 'Project Barley', 'Still Got It Fitness', 'Dr. Heidi Smith', 'Eskrimador Fighting',
-                'Palos Verdes Pulse', 'Eduard Sargsyan', 'Michelle Jaeger Jones', 'Crescent and Stone',
-                'Hearaid Foundation', 'Wellness Coach and Hypnotherapist Alina Ugas', 'Behavioral Therapist Michael Oden',
-                'Great Officiants', 'Forefront Media', 'Leilani Aquino', 'The Wild Owl Beauty The Artists\' Studio of Palos Verdes',
-                'At E\'s Massage', 'Lifeline Walk In Clinic', 'Ethos Jiu-Jitsu', 'Coconut Smiles',
-                'Maricel Rocha', 'Chefsforseniors', 'Ralph Dorwin - santa', 'Erik\'s Way', 'Vida Kitchen',
-                'Honey Pour', 'America\'s Trophy Co 2', 'Dane Myers', 'Rose Donato', 'Carol Schreiner',
-                'Nina Segedin', 'Mike Garcia', 'Jennifer Aponte', 'Wecomposting', 'Dave Kincaid',
-                'Red Cell Project', 'Coco Shin', 'Blai Herinn\'s Tommy Knuts', '@Chloe_twitch', 'Soraya Zain',
-                'Rhonda Linn', 'Food2Soil', 'Bonnie Got Juice', 'toca', 'jennsgemss', 'seawitch', 'dyinsf',
-                'Robb Briggs', 'Blue View', 'Sustainable shane', 'Ana Moreno - only fans gal', 'Didi Mogrobejo',
-                'Jack Sollecito', 'Fashion Revolution Mexico', '0Debris', 'Maria Shapley', 'Shant Baboujian',
-                'dr. michelle han', 'nick mattic', 'corky carroll', 'gina herrera', 'Laura Lockwood',
-                'Rhonda Jackson Studio D', 'Sunflower Nannies', 'Storied', 'Lucky Louie\'s Bartending',
-                'Lisette Thierry', 'Various artist david, katie, jennifer', 'Andrea Berman', 'Danceweaver',
-                'Ruby Vartan', 'Jenn.abides', 'Shoebox', 'Jeannie Lin dancing', 'Ruby Croak', 'Dollar Hits', 'Nik Kacy'
-            ];
-
-            // De-duplicate the list while preserving the original order
+            // Process the rawBrandNames list
             const seenNames = new Set();
             const showAllBrands = [];
 
-            rawBrandNames.forEach(name => {
+            rawBrandNames.forEach(item => {
+                let name = item.name;
+                let link = item.link;
+
                 // Handle special cases that shouldn't be fully lowercased
                 let capitalizedName = name;
-                if (name.includes('dr.')) {
-                    capitalizedName = "Dr. " + capitalize(name.replace('dr. ', ''));
-                } else if (name.includes('MJ') || name.includes('At E\'s')) {
-                    // Keep specific capitalization
-                } else if (!name.startsWith('@')) {
-                    capitalizedName = capitalize(name);
+                if (typeof name === 'string') {
+                    if (name.includes('dr.')) {
+                        capitalizedName = "Dr. " + capitalize(name.replace('dr. ', ''));
+                    } else if (name.includes('MJ') || name.includes('At E\'s')) {
+                        // Keep specific capitalization
+                    } else if (name.startsWith('@')) {
+                        // Keep @ names as is
+                    } else {
+                        capitalizedName = capitalize(name);
+                    }
                 }
 
                 // Use a consistent lowercase version for checking duplicates
                 const lowerName = capitalizedName.toLowerCase();
                 if (!seenNames.has(lowerName)) {
                     seenNames.add(lowerName);
-                    showAllBrands.push({ name: capitalizedName, href: '#' });
+                    showAllBrands.push({ name: capitalizedName, href: link });
                 }
             });
 
@@ -310,45 +436,34 @@
 
                 const track1 = createTrack();
                 const track2 = createTrack();
-
                 const animationDuration = logoFiles.length * scrollSpeed;
                 const animationStyle = `scroll-horizontal ${animationDuration}s linear infinite`;
-                
                 track1.style.animation = animationStyle;
                 track2.style.animation = animationStyle;
-
                 logoContainer.appendChild(track1);
                 logoContainer.appendChild(track2);
             }
             
-            
             // --- STATIC GRID POPULATION ---
-            
             const staticGrid = document.getElementById('static-logo-grid'); 
-            
             if (staticGrid && showAllBrands.length > 0) {
                 staticGrid.innerHTML = '';
-
                 showAllBrands.forEach(brand => {
                     const link = document.createElement('a');
                     link.href = brand.href; 
                     link.target = "_blank";
                     link.textContent = brand.name; 
                     link.className = "block p-1 text-center text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium"; 
-                    
                     staticGrid.appendChild(link);
                 });
             }
 
             // --- 3. "Show All" Button Toggle ---
-            
             const toggleButton = document.getElementById('toggle-static-gallery');
             const staticGridSection = document.getElementById('static-logo-grid-section');
-
             if (toggleButton && staticGridSection) {
                 toggleButton.addEventListener('click', () => {
                     const isHidden = staticGridSection.classList.contains('hidden');
-                    
                     if (isHidden) {
                         staticGridSection.classList.remove('hidden');
                         toggleButton.textContent = 'Show Less';
@@ -359,8 +474,59 @@
                 });
             }
 
-            // --- 4. Form Submission Handler ---
-            // REMOVED: Custom JS submission handler. Formspree will handle it.
+            // --- 4. AJAX Form Submission Handler ---
+            const form = document.getElementById('feedback-form');
+            const successMessage = document.getElementById('form-success-message');
+            const errorMessage = document.getElementById('form-error-message');
+            const submitButton = document.getElementById('form-submit-button');
+
+            if (form && successMessage && errorMessage && submitButton) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault(); // Prevent the default page reload
+                    
+                    const formData = new FormData(form);
+                    const originalButtonText = submitButton.textContent;
+                    
+                    // Disable button and show loading text
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Submitting...';
+                    
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Show success message
+                            successMessage.classList.remove('hidden');
+                            errorMessage.classList.add('hidden');
+                            form.reset(); // Clear the form
+                            
+                            // Hide message after 5 seconds
+                            setTimeout(() => {
+                                successMessage.classList.add('hidden');
+                            }, 5000);
+                        } else {
+                            // Show error message if something went wrong
+                            errorMessage.classList.remove('hidden');
+                            successMessage.classList.add('hidden');
+                        }
+                    })
+                    .catch(error => {
+                        // Show error message on network failure
+                        errorMessage.classList.remove('hidden');
+                        successMessage.classList.add('hidden');
+                    })
+                    .finally(() => {
+                        // Re-enable button
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalButtonText;
+                    });
+                });
+            }
 
         });
     </script>
